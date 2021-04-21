@@ -19,5 +19,6 @@ def count_npos(corpus1):
                 countpos[token.upos] += 1
 
     countpos.update({"tot_pos": tot})
+
     return countpos
 
