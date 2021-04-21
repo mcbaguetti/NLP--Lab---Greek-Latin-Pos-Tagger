@@ -36,6 +36,7 @@ def calc_eprob(corpus):
 
 
 countpos = count_npos(corpus1)
+calc_eprob(corpus)
 
 print(countpos)
 print(eprob)

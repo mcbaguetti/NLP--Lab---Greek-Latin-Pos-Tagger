@@ -1,6 +1,9 @@
 import pyconll.util
 from pathlib import Path
 
+
+countpos = {'SoS':1, 'EoS':1}
+
 file_path = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master/la_llct-ud-train.conllu")
 corpus1 = pyconll.iter_from_file(file_path)
 
@@ -17,6 +20,4 @@ def count_npos(corpus1):
 
     countpos.update({"tot_pos": tot})
     return countpos
-
-countpos = {'SoS':1, 'EoS':1}
 
