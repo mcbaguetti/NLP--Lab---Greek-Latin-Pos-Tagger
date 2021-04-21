@@ -2,8 +2,8 @@ import pyconll.util
 from countpos import count_npos
 
 
-corpus = pyconll.iter_from_file('/home/lordp/Scrivania/UD_Latin-LLCT-master/la_llct-ud-train.conllu')
-corpus1 = pyconll.iter_from_file('/home/lordp/Scrivania/UD_Latin-LLCT-master/la_llct-ud-train.conllu')
+corpus = pyconll.iter_from_file('C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master')
+corpus1 = pyconll.iter_from_file('C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master')
 arrow = " -> "
 eprob = {'SoS -> SoS': 1, 'EoS -> EoS': 1}
 
