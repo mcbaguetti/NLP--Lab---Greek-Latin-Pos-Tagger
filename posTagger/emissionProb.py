@@ -1,11 +1,15 @@
 import pyconll.util
 from countpos import count_npos
+from pathlib import Path
 
 
-corpus = pyconll.iter_from_file('C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master')
-corpus1 = pyconll.iter_from_file('C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master')
 arrow = " -> "
 eprob = {'SoS -> SoS': 1, 'EoS -> EoS': 1}
+
+
+file_path = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master/la_llct-ud-train.conllu")
+corpus = pyconll.iter_from_file(file_path)
+corpus1 = pyconll.iter_from_file(file_path)
 
 
 def calc_eprob(corpus):
@@ -32,7 +36,6 @@ def calc_eprob(corpus):
 
 
 countpos = count_npos(corpus1)
-calc_eprob(corpus)
 
 print(countpos)
 print(eprob)

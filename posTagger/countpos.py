@@ -1,7 +1,7 @@
 import pyconll.util
 from pathlib import Path
 
-file_path = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master")
+file_path = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master/la_llct-ud-train.conllu")
 corpus1 = pyconll.iter_from_file(file_path)
 
 def count_npos(corpus1):
