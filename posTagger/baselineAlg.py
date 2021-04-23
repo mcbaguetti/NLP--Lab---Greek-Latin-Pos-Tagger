@@ -18,8 +18,7 @@ def baseline_tagger(corpusx):
     for sentence in corpusx:
         for token in sentence:
             pos = get_most_used_tag(token.form)
-            if pos not in pos_tagged:
-                pos_tagged.update({token.form : pos})
+            pos_tagged.update({token.form : pos})
 
     return pos_tagged
 
