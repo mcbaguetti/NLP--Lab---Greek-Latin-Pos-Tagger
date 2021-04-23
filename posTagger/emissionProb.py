@@ -1,12 +1,13 @@
 import pyconll.util
 from countpos import count_npos
 from pathlib import Path
+import _pickle as pickle
 
 
 arrow = " -> "
 eprob = {'SoS -> SoS': 1, 'EoS -> EoS': 1}
 
-
+latin_file_path = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/probabilities/latin/emission-prob.txt")
 file_path = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master/la_llct-ud-train.conllu")
 corpus = pyconll.iter_from_file(file_path)
 corpus1 = pyconll.iter_from_file(file_path)
@@ -34,9 +35,16 @@ def calc_eprob(corpus):
         if key_pos in countpos.keys():
             eprob[name] /= countpos[key_pos]
 
+    #scrive nel file il dizionario eprob
+    with open(latin_file_path, 'w') as file:
+        for key in sorted(eprob.keys()):
+            file.write("'%s'='%s', \n" % (key, eprob[key]))
+
+
 
 countpos = count_npos(corpus1)
 calc_eprob(corpus)
+
 
 print(countpos)
 print(eprob)
