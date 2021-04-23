@@ -8,7 +8,7 @@ tprob = {}
 sos = 'SoS'
 eos = 'EoS'
 
-latin_file_path = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/probabilities/latin/transmission-prob.txt")
+tr_latin_file_path = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/probabilities/latin/transmission-prob.txt")
 file_path = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master/la_llct-ud-train.conllu")
 corpus = pyconll.iter_from_file(file_path)
 corpus1 = pyconll.iter_from_file(file_path)
@@ -69,9 +69,9 @@ def tprob2(corpus):
     #calcola la vera probabilità dividendo per il numero di casi totali
 
     #scrive nel file il dizionario tprob
-    with open(latin_file_path, 'w') as file:
+    with open(tr_latin_file_path, 'w') as file:
         for key in sorted(tprob.keys()):
-            file.write("'%s'='%s', \n" % (key, tprob[key]))
+            file.write("%s = %s \n" % (key, tprob[key]))
 
 
 #aggiunge una una chiave ad una hash oppure se esiste già incrementa il suo valore
