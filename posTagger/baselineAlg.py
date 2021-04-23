@@ -1,6 +1,6 @@
 import pyconll
 from pathlib import Path
-from mostUsedTag import most_used_tag
+from read_files import get_most_used_tag
 
 
 pos_tagged = {}
@@ -15,13 +15,11 @@ corpus1 = pyconll.iter_from_file(file_pathdev)
 #assegna il tag a ogni token in base al più frequente tag di quella parola
 def baseline_tagger(corpusx):
 
-    freq_tag_dict = most_used_tag(corpus)
-
     for sentence in corpusx:
         for token in sentence:
-            for freq in freq_tag_dict:
-                if freq == token.form and freq not in pos_tagged:
-                    pos_tagged.update({freq : freq_tag_dict[freq]})
+            pos = get_most_used_tag(token.form)
+            if pos not in pos_tagged:
+                pos_tagged.update({token.form : pos})
 
     return pos_tagged
 

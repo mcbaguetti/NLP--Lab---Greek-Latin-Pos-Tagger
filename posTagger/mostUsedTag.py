@@ -7,7 +7,7 @@ countname = {}
 cprob = {}
 frequent_tag_word = {}
 
-
+used_tag_latin = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/probabilities/latin/most-used-tags.txt")
 file_path = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master/la_llct-ud-train.conllu")
 corpus = pyconll.iter_from_file(file_path)
 corpus1 = pyconll.iter_from_file(file_path)
@@ -55,8 +55,10 @@ def most_used_tag(corpus):
             if key_copy_name == key_name and cprob[name] >= copy_dict[copy]:
                 frequent_tag_word.update({key_name : key_pos})
 
-    return frequent_tag_word
+    #scrive nel file il dizionario eprob
+    with open(used_tag_latin, 'w') as file:
+        for key in sorted(frequent_tag_word.keys()):
+            file.write("%s = %s \n" % (key, frequent_tag_word[key]))
 
 count_name(corpus)
 freq_tag = most_used_tag(corpus1)
-print(frequent_tag_word)
