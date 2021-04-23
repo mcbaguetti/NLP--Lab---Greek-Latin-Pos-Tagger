@@ -6,7 +6,7 @@ arrow = " -> "
 tr_latin_file_path = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/probabilities/latin/transmission-prob.txt")
 em_latin_file_path = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/probabilities/latin/emission-prob.txt")
 
-#prende le probabilità tag -> word
+#prende le probabilità tag -> word, se non riesce a trovare nulla ritorna 0.0
 def get_eprob(tag, word):
     prob_name = tag + arrow + word
 
@@ -19,6 +19,7 @@ def get_eprob(tag, word):
     return error
 
 
+#prende le probabilità old_tag -> tag, se non riesce a trovare nulla ritorna 0.0
 def get_tprob(tag, old_tag):
     prob_name = old_tag + arrow + tag
 
