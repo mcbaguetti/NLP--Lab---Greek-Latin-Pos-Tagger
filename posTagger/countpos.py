@@ -27,13 +27,15 @@ def count_npos(corpus1):
 
 def save_tags():
 
-    with open(latin_most_used, 'r') as file:
-        for line in file:
+    with open(latin_most_used, 'r') as fileread:
+        for line in fileread:
             pos = line.split(equal, 1)[1]
             pos = pos.split(space, 1)[0]
 
             # scrive nel file i pos
-            with open(tags_fp, 'w') as file:
-                content = file.read()
+            with open(tags_fp, 'r+') as filewrite:
+                content = filewrite.read()
                 if pos not in content:
-                    file.write("%s\n" % pos)
+                    filewrite.write("%s\n" % pos)
+
+save_tags()
