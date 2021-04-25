@@ -5,6 +5,7 @@ import numpy as np
 noun = "NOUN"
 new_line = "\n"
 error = 0.0
+n_tag = 15
 equal = " = "
 space = " "
 arrow = " -> "
@@ -57,7 +58,7 @@ def get_most_used_tag(word):
 #ritorna un array con i tag in ordine
 def get_tags():
 
-    pos_array = np.ndarray(dtype=str)
+    pos_array = np.ndarray(shape=(n_tag, ), dtype=str)
 
     with open(tags_fp, 'r') as file:
 
