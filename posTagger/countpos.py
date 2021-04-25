@@ -1,9 +1,12 @@
 import pyconll.util
 from pathlib import Path
 
-
+space = " "
+equal = " = "
 countpos = {'SoS':1, 'EoS':1}
 
+latin_most_used = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/probabilities/latin/most-used-tags.txt")
+tags_fp = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/probabilities/latin/tags.txt")
 file_path = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master/la_llct-ud-train.conllu")
 corpus1 = pyconll.iter_from_file(file_path)
 
@@ -21,3 +24,16 @@ def count_npos(corpus1):
     countpos.update({"tot_pos": tot})
 
     return countpos
+
+def save_tags():
+
+    with open(latin_most_used, 'r') as file:
+        for line in file:
+            pos = line.split(equal, 1)[1]
+            pos = pos.split(space, 1)[0]
+
+            # scrive nel file i pos
+            with open(tags_fp, 'w') as file:
+                content = file.read()
+                if pos not in content:
+                    file.write("%s\n" % pos)
