@@ -66,7 +66,7 @@ def get_tags():
 
         for line in file:
             pos = line.split(new_line, 1)[0]
-            pos_array = np.append(pos, pos_array[count])
+            pos_array = pos
             count += 1
 
     return pos_array
