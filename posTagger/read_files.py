@@ -58,7 +58,7 @@ def get_most_used_tag(word):
 #ritorna un array con i tag in ordine
 def get_tags():
 
-    pos_array = np.ndarray(shape=(n_tag, ), dtype=str)
+    pos_array = np.empty(shape=n_tag, dtype=np.dtype('U25'))
 
     with open(tags_fp, 'r') as file:
 
@@ -66,7 +66,7 @@ def get_tags():
 
         for line in file:
             pos = line.split(new_line, 1)[0]
-            pos_array = pos
+            pos_array[count] = pos
             count += 1
 
     return pos_array
