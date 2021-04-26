@@ -5,7 +5,7 @@ import numpy as np
 noun = "NOUN"
 new_line = "\n"
 error = 0.0
-n_tag = 15
+n_tag = 17
 equal = " = "
 space = " "
 arrow = " -> "

@@ -1,6 +1,8 @@
 import pyconll.util
 from pathlib import Path
 
+sos = "SoS"
+eos = "EoS"
 space = " "
 equal = " = "
 countpos = {'SoS':1, 'EoS':1}
@@ -37,5 +39,11 @@ def save_tags():
                 content = filewrite.read()
                 if pos not in content:
                     filewrite.write("%s\n" % pos)
+
+    #aggiungo sos e eos
+    with open(tags_fp, 'a') as filewrite:
+        filewrite.write(sos +"\n")
+        filewrite.write(eos)
+
 
 save_tags()

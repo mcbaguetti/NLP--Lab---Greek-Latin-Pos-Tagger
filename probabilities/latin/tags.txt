@@ -13,3 +13,5 @@ DET
 AUX
 CCONJ
 PART
+SoS
+EoS
