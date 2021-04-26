@@ -20,6 +20,7 @@ def viterbi(corpus):
 
     for sentence in corpus:
 
+        print(sentence.id)
         s_length = sentence.__len__()
         mat = np.zeros(shape=(pos_len, s_length + special_char))
         token_arr = np.empty(shape=(s_length + special_char), dtype=np.dtype('U15'))
@@ -29,7 +30,7 @@ def viterbi(corpus):
         backtrace[0] = sos
         max_col = 1
         #corrisponde a sos nel tagset, quindi è il valora iniziale
-        index_max_col = 16
+        index_max_col = 15
 
 
         #inizializzo l'array di token
@@ -48,7 +49,6 @@ def viterbi(corpus):
 
                 #per le successive colonne controllo le righe della colonna precedente e salvo la massima prob per ogni casella della colonna attuale
                 else:
-                    col_prev = col - 1
                     e_prob = read_files.get_eprob(pos_array[row], token_arr[col])
                     old_tag = pos_array[index_max_col]
                     t_prob = read_files.get_tprob(pos_array[row], old_tag)
@@ -56,16 +56,6 @@ def viterbi(corpus):
 
                     if temp_prob > mat[row, col]:
                         mat[row, col] = temp_prob
-
-
-                    for idx in range(pos_len):
-                        old_tag = pos_array[idx]
-                        t_prob = read_files.get_tprob(pos_array[row], old_tag)
-
-                        temp_prob = mat[idx, col_prev] * float(e_prob) * float(t_prob)
-
-                        if temp_prob > mat[row, col]:
-                            mat[row, col] = temp_prob
 
             #calcolo il max della colonna e salvo il pos del max nel backtrace
             if col != 0:
