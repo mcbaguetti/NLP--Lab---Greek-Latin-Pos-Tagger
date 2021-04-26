@@ -21,6 +21,7 @@ def viterbi(corpus):
 
     for sentence in corpus:
 
+        print(sentence.id)
         s_length = sentence.__len__()
         mat = np.zeros(shape=(pos_len, s_length + special_char))
         token_arr = np.empty(shape=(s_length + special_char), dtype=np.dtype('U25'))
@@ -29,6 +30,8 @@ def viterbi(corpus):
         prev_states = np.empty(shape=pos_len, dtype=np.dtype('U25'))
         backtrace = np.empty(shape=(s_length + special_char), dtype=np.dtype('U25'))
         backtrace[0] = sos
+        max_col = 1
+        index_max_col = 16
 
         #inizializzo l'array di token
         for token in sentence:
@@ -46,31 +49,30 @@ def viterbi(corpus):
 
                 #per le successive colonne controllo le righe della colonna precedente e salvo la massima prob per ogni casella della colonna attuale
                 else:
-                    col_prev = col - 1
                     e_prob = read_files.get_eprob(pos_array[row], token_arr[col])
                     if e_prob == 0:
                         e_prob = save_prob
 
-                    for idx in range(pos_len):
-                        old_tag = pos_array[idx]
-                        t_prob = read_files.get_tprob(pos_array[row], old_tag)
-                        if t_prob == 0:
+                    old_tag = pos_array[index_max_col]
+                    t_prob = read_files.get_tprob(pos_array[row], old_tag)
+                    if t_prob == 0:
                             t_prob = save_prob
 
-                        temp_prob = mat[idx, col_prev] * float(e_prob) * float(t_prob)
+                    temp_prob = max_col * float(e_prob) * float(t_prob)
 
-                        if temp_prob > mat[row, col]:
-                            mat[row, col] = temp_prob
-                            prev_states[row] = old_tag
+                    if temp_prob > mat[row, col]:
+                        mat[row, col] = temp_prob
+                        prev_states[row] = old_tag
 
             #calcolo il max della colonna e salvo il pos del max nel backtrace
             if col != 0:
                 index_max_col = mat.argmax(axis=0)[col]
+                max_col = mat.max(axis=0)[col]
                 backtrace[col] = pos_array[index_max_col]
 
 
 
-        for i in range(backtrace.__len__()):
-            print(token_arr[i] + space + backtrace[i])
+        #for i in range(backtrace.__len__()):
+            #print(token_arr[i] + space + backtrace[i])
 
 viterbi(corpus1)
