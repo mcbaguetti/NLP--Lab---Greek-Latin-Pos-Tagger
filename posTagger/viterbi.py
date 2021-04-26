@@ -22,7 +22,7 @@ def viterbi(corpus):
     for sentence in corpus:
 
         s_length = sentence.__len__()
-        mat = np.ndarray(shape=(pos_len, s_length + special_char), dtype=float)
+        mat = np.zeros(shape=(pos_len, s_length + special_char))
         token_arr = np.empty(shape=(s_length + special_char), dtype=np.dtype('U25'))
         count = 0
         token_arr[count] = sos
@@ -42,6 +42,7 @@ def viterbi(corpus):
                 if col == 0:
                     e_prob = read_files.get_eprob(pos_array[row], token_arr[col])
                     mat[row, col] = e_prob
+
                 #per le successive colonne controllo le righe della colonna precedente e salvo la massima prob per ogni casella della colonna attuale
                 else:
                     col_prev = col - 1
@@ -55,12 +56,12 @@ def viterbi(corpus):
                         if t_prob == 0:
                             t_prob = save_prob
 
-                        temp_prob = mat[idx, col_prev] * abs(np.log(float(e_prob)) + np.log(float(t_prob)))
+                        temp_prob = mat[idx, col_prev] * float(e_prob) * float(t_prob)
 
                         if temp_prob > mat[row, col]:
                             mat[row, col] = temp_prob
                             backtrace[col] = old_tag
-
+                            print(old_tag)
 
         for i in range(backtrace.__len__()):
             print(token_arr[i] + space + backtrace[i])
