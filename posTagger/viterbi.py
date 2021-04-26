@@ -26,6 +26,7 @@ def viterbi(corpus):
         token_arr = np.empty(shape=(s_length + special_char), dtype=np.dtype('U25'))
         count = 0
         token_arr[count] = sos
+        prev_states = np.empty(shape=pos_len, dtype=np.dtype('U25'))
         backtrace = np.empty(shape=(s_length + special_char), dtype=np.dtype('U25'))
         backtrace[0] = sos
 
@@ -60,8 +61,14 @@ def viterbi(corpus):
 
                         if temp_prob > mat[row, col]:
                             mat[row, col] = temp_prob
-                            backtrace[col] = old_tag
-                            print(old_tag)
+                            prev_states[row] = old_tag
+
+            #calcolo il max della colonna e salvo il pos del max nel backtrace
+            if col != 0:
+                index_max_col = mat.argmax(axis=0)[col]
+                backtrace[col] = pos_array[index_max_col]
+
+
 
         for i in range(backtrace.__len__()):
             print(token_arr[i] + space + backtrace[i])
