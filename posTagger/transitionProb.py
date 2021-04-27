@@ -8,7 +8,6 @@ tprob = {}
 sos = 'SoS'
 eos = 'EoS'
 
-tr_latin_file_path = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/probabilities/latin/transmission-prob.txt")
 file_path = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master/la_llct-ud-train.conllu")
 corpus = pyconll.iter_from_file(file_path)
 corpus1 = pyconll.iter_from_file(file_path)

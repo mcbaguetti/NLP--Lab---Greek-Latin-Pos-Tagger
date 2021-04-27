@@ -87,5 +87,5 @@ def viterbi(corpus):
 
         for i in range(backtrace.__len__()):
             print(token_arr[i] + space + backtrace[i])
-            
+
 viterbi(corpus1)
