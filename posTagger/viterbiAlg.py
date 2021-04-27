@@ -38,7 +38,6 @@ def get_tprob(tag, oldtag):
 
 def viterbi(corpus):
 
-
     for sentence in corpus:
 
         print(sentence.id)
