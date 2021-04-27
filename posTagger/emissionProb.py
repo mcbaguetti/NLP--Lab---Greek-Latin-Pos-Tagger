@@ -34,10 +34,7 @@ def calc_eprob(corpus):
         if key_pos in countpos.keys():
             eprob[name] /= countpos[key_pos]
 
-    #scrive nel file il dizionario eprob
-    with open(em_latin_file_path, 'w') as file:
-        for key in sorted(eprob.keys()):
-            file.write("%s = %s \n" % (key, eprob[key]))
+    return eprob
 
 
 

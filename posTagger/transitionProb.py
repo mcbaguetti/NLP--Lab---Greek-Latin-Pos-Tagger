@@ -66,12 +66,7 @@ def tprob2(corpus):
         elif key_sos != sos:
             tprob[name] /= n_pos[key_sos]
 
-    #calcola la vera probabilità dividendo per il numero di casi totali
-
-    #scrive nel file il dizionario tprob
-    with open(tr_latin_file_path, 'w') as file:
-        for key in sorted(tprob.keys()):
-            file.write("%s = %s \n" % (key, tprob[key]))
+    return tprob
 
 
 #aggiunge una una chiave ad una hash oppure se esiste già incrementa il suo valore

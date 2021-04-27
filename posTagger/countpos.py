@@ -40,10 +40,6 @@ def save_tags():
                 if pos not in content:
                     filewrite.write("%s\n" % pos)
 
-    #aggiungo sos e eos
-    with open(tags_fp, 'a') as filewrite:
-        filewrite.write(sos +"\n")
-        filewrite.write(eos)
 
 
 save_tags()
