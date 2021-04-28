@@ -1,7 +1,7 @@
 import pyconll
 from pathlib import Path
 from read_files import get_most_used_tag
-
+import accuracyBaseline
 
 pos_tagged = {}
 
@@ -20,9 +20,7 @@ def baseline_tagger(corpusx):
             pos = get_most_used_tag(token.form)
             pos_tagged.update({token.form : pos})
 
-    return pos_tagged
-
+    accuracyBaseline.calc_accuracy(pos_tagged, file_pathdev)
 
 baseline_tagger(corpus1)
 
-print(pos_tagged)

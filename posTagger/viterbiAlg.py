@@ -4,9 +4,10 @@ import numpy as np
 import read_files
 import emissionProb
 import transitionProb
+import accuracyTest
 
 file_pathdev = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master/la_llct-ud-train.conllu")
-file_pathdev1 = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master/la_llct-ud-dev.conllu")
+file_pathdev1 = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master/la_llct-ud-test.conllu")
 corpus1 = pyconll.iter_from_file(file_pathdev1)
 corpus = pyconll.iter_from_file(file_pathdev)
 corpus2 = pyconll.iter_from_file(file_pathdev)
@@ -82,9 +83,11 @@ def viterbi(corpus):
                 index_max_col = mat.argmax(axis=0)[col]
                 backtrace[col] = pos_array[index_max_col]
 
-
-
         for i in range(backtrace.__len__()):
             print(token_arr[i] + space + backtrace[i])
+
+        accuracyTest.save_num(backtrace, sentence)
+
+    accuracyTest.print_accuracy()
 
 viterbi(corpus1)
