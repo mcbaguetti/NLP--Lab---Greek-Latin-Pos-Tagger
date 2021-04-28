@@ -27,12 +27,7 @@ def count_npos(corpus):
     tot = 2
     for sentence in corpus:
         for token in sentence:
-            tot+=1
-            #se non c'è un tag lo aggiunge nelle key di countpos e lo inizializza a 1, altrimenti aumenta di 1 il val del pos
-            if token.upos not in countpos.keys():
-                countpos.update({token.upos : 1})
-            else:
-                countpos[token.upos] += 1
+            add_to_hash(countpos, token.upos)
 
     countpos.update({"tot_pos": tot})
 
@@ -45,14 +40,8 @@ def calc_eprob(corpus):
     #la prima parte della funzione calcola le occorrenze delle varie combinazioni tag -> parola
     for sentence in corpus:
         for token in sentence:
-
             name = token.upos + arrow + token.form
-
-            #se non c'è un name lo aggiunge nelle key di eprob e lo inizializza a 1, altrimenti aumenta di 1 il val del pos
-            if name not in eprob.keys():
-                eprob.update({name : 1})
-            else:
-                eprob[name] += 1
+            add_to_hash(eprob, name)
 
     #divide i value di eprob per il corrispettivo value di countpos, caratterizzato dallo stesso tag
     for name in eprob:
@@ -74,12 +63,7 @@ def t_prob(corpus):
 
                 nameprob = sos + arrow + token.upos
                 num_sos += 1
-
-                if nameprob not in tprob.keys():
-                    tprob.update({nameprob: 1})
-
-                else:
-                    tprob[nameprob] += 1
+                add_to_hash(tprob, nameprob)
 
     #trovo l'effettiva probabilità di SoS->tag dividendo per count, ovvero il numero totale di SoS->tag
     for key in tprob:
@@ -122,11 +106,7 @@ def count_name(corpus):
     for sentence in corpus:
         for token in sentence:
             name = token.form
-            #se non c'è un name lo aggiunge nelle key di countname e lo inizializza a 1, altrimenti aumenta di 1 il val del pos
-            if name not in countname.keys():
-                countname.update({name : 1})
-            else:
-                countname[name] += 1
+            add_to_hash(countname, name)
 
     return countname
 
@@ -137,14 +117,8 @@ def most_used_tag(corpus):
 
     for sentence in corpus:
         for token in sentence:
-
             name = token.form + slash + token.upos
-
-            # se non c'è un name lo aggiunge nelle key di cprob e lo inizializza a 1, altrimenti aumenta di 1 il val del pos
-            if name not in cprob.keys():
-                cprob.update({name: 1})
-            else:
-                cprob[name] += 1
+            add_to_hash(cprob, name)
 
     # divide i value di cprob per il corrispettivo value di countname, cioè con lo stesso name
     for name in cprob:
