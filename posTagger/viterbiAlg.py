@@ -4,7 +4,7 @@ import numpy as np
 import read_files
 import emissionProb
 import transitionProb
-import accuracyTest
+import accuracyViterbi
 
 file_pathdev = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master/la_llct-ud-train.conllu")
 file_pathdev1 = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master/la_llct-ud-test.conllu")
@@ -86,8 +86,8 @@ def viterbi(corpus):
         for i in range(backtrace.__len__()):
             print(token_arr[i] + space + backtrace[i])
 
-        accuracyTest.save_num(backtrace, sentence)
+        accuracyViterbi.save_num(backtrace, sentence)
 
-    accuracyTest.print_accuracy()
+    accuracyViterbi.print_accuracy()
 
 viterbi(corpus1)
