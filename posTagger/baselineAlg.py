@@ -20,7 +20,7 @@ def baseline_tagger(corpusx):
         for token in sentence:
 
             if token.form not in freq_dict:
-                pos = smooth.simple_smooth()
+                pos = smooth.simple_smooth_bis()
             else:
                 pos = freq_dict[token.form]
 
