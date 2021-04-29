@@ -15,6 +15,8 @@ def calc_accuracy(pos_dict, path):
     for sentence in corpus:
         tot_sentence += 1
         for token in sentence:
+            print(token.form)
+            print(token.upos)
             if pos_dict[token.form] == token.upos:
                 correct += 1
             tot_word += 1
