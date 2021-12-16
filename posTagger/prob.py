@@ -20,30 +20,30 @@ cprob = {}
 frequent_tag_word = {}
 
 file_path = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master/la_llct-ud-train.conllu")
+file_pathdevgreek = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Ancient_Greek-Perseus-master/grc_perseus-ud-train.conllu")
 corpus = pyconll.iter_from_file(file_path)
 
 
-#salva i tag e conta le loro occorrenze
+# salva i tag e conta le loro occorrenze
 def count_npos(corpus):
-    tot = 2
     for sentence in corpus:
         for token in sentence:
             add_to_hash(countpos, token.upos)
     return countpos
 
 
-#calcola le emission probability e le ritorna tramite dizionario
+# calcola le emission probability e le ritorna tramite dizionario
 def e_prob(corpus):
 
-    #la prima parte della funzione calcola le occorrenze delle varie combinazioni tag -> parola
+    # la prima parte della funzione calcola le occorrenze delle varie combinazioni tag -> parola
     for sentence in corpus:
         for token in sentence:
             name = token.upos + arrow + token.form
             add_to_hash(eprob, name)
 
-    #divide i value di eprob per il corrispettivo value di countpos, caratterizzato dallo stesso tag
+    # divide i value di eprob per il corrispettivo value di countpos, caratterizzato dallo stesso tag
     for name in eprob:
-        #salva in una str la prima parte della key di eprob cioè il tag
+        # salva in una str la prima parte della key di eprob cioè il tag
         key_pos = name.split(space, 1)[0]
         if key_pos in n_pos.keys():
             eprob[name] /= n_pos[key_pos]
@@ -51,29 +51,13 @@ def e_prob(corpus):
     return eprob
 
 
-#calcola le transmission probability e le ritorna tramite dizionario
-def t_prob(corpus):
-    #prima devo calcolare a parte la probabilità di SoS->tag, per fare questo inizio col calcolare il num di Sos->tag
-    num_sos = 0
-    for sentence in corpus:
-        for token in sentence:
-            if int(token.id) == 1:
-
-                nameprob = sos + arrow + token.upos
-                num_sos += 1
-                add_to_hash(tprob, nameprob)
-
-    #trovo l'effettiva probabilità di SoS->tag dividendo per count, ovvero il numero totale di SoS->tag
-    for key in tprob:
-        tprob[key]/= num_sos
-
+# calcola le transition probability e le ritorna tramite dizionario
 def t_prob_fin(corpus):
     num_eos = 0
-    # calcolo tutte le altre probabilità di SoS->tag
     for sentence in corpus:
         length = sentence.__len__()
         for token in sentence:
-            # se il token non è l'ultimo allora o lo salva se è nuovo o incrementa il tag -> tag
+            # se il token non è l'ultimo allora o lo salva se è nuovo o incrementa il tag i-1 -> tag i
             if length > 1:
                 next_token = sentence.__getitem__(int(token.id))
                 nameprob = token.upos + arrow + next_token.upos
@@ -86,7 +70,7 @@ def t_prob_fin(corpus):
 
             length -= 1
 
-    #calcola tutte le altre probabilità di trasmissione tranne sos->tag
+    # calcola tutte le probabilità di transizione tag i-1 -> tag i
     for name in tprob:
         # salva in una str la seconda parte della key di tprob cioè il tag dopo la freccia
         key_eos = name.split(arrow, 1)[1]
@@ -100,7 +84,7 @@ def t_prob_fin(corpus):
     return tprob
 
 
-#conta le frequenze dei nomi e le ritorna sotto forma di dizionario
+# conta le frequenze dei nomi e le ritorna sotto forma di dizionario
 def count_name(corpus):
     for sentence in corpus:
         for token in sentence:
@@ -110,7 +94,7 @@ def count_name(corpus):
     return countname
 
 
-#conta i tag più frequenti per parola e le ritorna sotto forma di dizionario
+# conta i tag più frequenti per parola e le ritorna sotto forma di dizionario
 def most_used_tag(corpus):
     # la prima parte della funzione calcola le occorrenze delle varie combinazioni parola / tag
 
@@ -127,18 +111,18 @@ def most_used_tag(corpus):
             cprob[name] /= countname[key_name]
 
     copy_dict = cprob.copy()
-    #trova la parola con il tag più frequente per una ciascuna parola
+    # trova la parola con il tag più frequente per una ciascuna parola
     for name in cprob:
         key_name = name.split(slash, 1)[0]
         key_pos = name.split(slash, 1)[1]
         for copy in copy_dict:
             key_copy_name = copy.split(slash, 1)[0]
             if key_copy_name == key_name and cprob[name] >= copy_dict[copy]:
-                frequent_tag_word.update({key_name : key_pos})
+                frequent_tag_word.update({key_name: key_pos})
     return frequent_tag_word
 
 
-#ritorna un array di tutti i tags
+# ritorna un array di tutti i tags
 def get_tags():
     pos_array = np.empty(shape=n_tag, dtype=np.dtype('U5'))
     count = 0
@@ -151,7 +135,7 @@ def get_tags():
     return pos_array
 
 
-#aggiunge una una chiave ad una hash oppure se esiste già incrementa il suo valore
+# aggiunge una una chiave ad una hash oppure se esiste già incrementa il suo valore
 def add_to_hash(hash, key):
     if key not in hash.keys():
         hash.update({key: 1})
