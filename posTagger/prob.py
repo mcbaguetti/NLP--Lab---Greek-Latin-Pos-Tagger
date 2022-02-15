@@ -21,7 +21,10 @@ frequent_tag_word = {}
 
 file_path = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master/la_llct-ud-train.conllu")
 file_pathdevgreek = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Ancient_Greek-Perseus-master/grc_perseus-ud-train.conllu")
+
+
 corpus = pyconll.iter_from_file(file_path)
+#corpus = pyconll.iter_from_file(file_pathdevgreek)
 
 
 # salva i tag e conta le loro occorrenze

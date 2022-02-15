@@ -5,7 +5,10 @@ import pyconll
 
 file_pathdev1 = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master/la_llct-ud-dev.conllu")
 file_pathdevgreek = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Ancient_Greek-Perseus-master/grc_perseus-ud-train.conllu")
+
 corpus = pyconll.iter_from_file(file_pathdev1)
+#corpus = pyconll.iter_from_file(file_pathdevgreek)
+
 save_prob = 0.00000000001
 
 

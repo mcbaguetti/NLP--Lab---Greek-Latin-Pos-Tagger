@@ -11,8 +11,11 @@ file_path = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_
 file_pathdev = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Latin-LLCT-master/la_llct-ud-dev.conllu")
 file_pathdevgreek = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Ancient_Greek-Perseus-master/grc_perseus-ud-train.conllu")
 file_pathdevgreek1 = Path("C:/Users/funkt/Documents/GitHub/nlp-greek-latin-pos-tagger/UD_Ancient_Greek-Perseus-master/grc_perseus-ud-dev.conllu")
+
 corpus = pyconll.iter_from_file(file_path)
 corpus1 = pyconll.iter_from_file(file_pathdev)
+#corpus = pyconll.iter_from_file(file_pathdevgreek)
+#corpus1 = pyconll.iter_from_file(file_pathdevgreek1)
 
 
 # assegna il tag a ogni token in base al più frequente tag di quella parola

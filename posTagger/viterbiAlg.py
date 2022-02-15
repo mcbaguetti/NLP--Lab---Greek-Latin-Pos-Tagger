@@ -16,6 +16,13 @@ corpus = pyconll.iter_from_file(file_pathdev)
 corpus2 = pyconll.iter_from_file(file_pathdev)
 corpus3 = pyconll.iter_from_file(file_pathdev)
 
+
+#corpus1 = pyconll.iter_from_file(file_pathdevgreek1)
+#corpus = pyconll.iter_from_file(file_pathdevgreek)
+#corpus2 = pyconll.iter_from_file(file_pathdevgreek)
+#corpus3 = pyconll.iter_from_file(file_pathdevgreek)
+
+
 # sono i caratteri SoS + EoS
 special_char = 2
 save_prob = 0.00000000001
